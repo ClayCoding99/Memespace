@@ -5,9 +5,10 @@ const User = require('../models/user');
 const statusCodes = require('../util/statusCodes');
 const fs = require('fs');
 const path = require('path');
+const authenticateToken = require('../middleware/authenticateToken.js');
 
-// TODO: to grab the user data we should wrap this with a middleware to make sure the person is authenticated
-router.get("/", async (req, res) => {
+// get all users
+router.get("/all", async (req, res) => {
     try {
         const users = await User.find({});
         const filteredUsers = users.map((user) => {
@@ -20,9 +21,10 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get('/:email', async (req, res) => {
+// get the current authenticated user (CHANGE)
+router.get('/', authenticateToken, async (req, res) => {
     try {   
-        const email = req.params.email;
+        const email = req.user.email;
         console.log(email);
         if (!email) {
             return res.status(statusCodes.BAD_REQUEST).json({error: "Must provide an email in the params to obtain the user!"});
@@ -39,7 +41,7 @@ router.get('/:email', async (req, res) => {
     }
 });
 
-// update the user
+// update the authenticated user (CHANGE)
 router.patch('/update/:email', profilePictureUpload.single('profilePicture'), async (req, res) => {
     try {
         const updatedUserData = req.body;

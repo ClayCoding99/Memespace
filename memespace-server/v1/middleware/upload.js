@@ -22,6 +22,15 @@ const profilePictureUpload = multer({
 });
 
 
+
+
+const maxVideoDuration = 500; // in seconds
+const maxVideoSizeInMB = 100000; // in megabytes
+
+// Calculate the bitrate limit based on the desired size and duration
+const maxVideoSizeInBytes = maxVideoSizeInMB * 1024 * 1024;
+const bitrateLimit = (maxVideoSizeInBytes / (maxVideoDuration * 1024)) * 8;
+
 // upload for posts
 const postStorage = multer.diskStorage({
     destination: (req, file, callback) => {
@@ -34,11 +43,24 @@ const postStorage = multer.diskStorage({
 });
 const postUpload = multer({
     storage: postStorage,
-    fileFilter: imageFilter,
+    fileFilter: videoFilter,
     limits: {
-        fileSize: 1024 * 1024 * 2
+        maxVideoDuration,
     }
 });
+
+
+// filter for posts
+function videoFilter(req, file, callback) {
+    // Check if the file is an MP4 video
+    if (file.mimetype === 'video/mp4') {
+
+        callback(null, true);
+   
+    } else if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+        callback(null, true);
+    }
+}
 
 
 // filter for only allowing image file types through

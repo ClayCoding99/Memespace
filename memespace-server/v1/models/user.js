@@ -28,6 +28,13 @@ const userSchema = new mongoose.Schema({
     profilePictureURL: {
         type: String,
     },
+    bannerColor: {
+        type: String,
+    },
+    refreshToken: {
+        type: String,
+        required: true
+    },
 
     createdAt: {
         type: Date,

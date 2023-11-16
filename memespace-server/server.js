@@ -43,10 +43,13 @@ const authRoutes = require('./v1/auth/auth.js');
 const userRoutes = require('./v1/user/user.js');
 const postRoutes = require('./v1/post/post.js');
 app.use('/v1/auth', authRoutes);
+
+// for testing purposes, make it so that you need to be authenticated to see any data in the app
 app.use('/v1/user', userRoutes);
 app.use("/v1/post", postRoutes);
 
 // begin the server
 app.listen(port, () => {
     console.log("Listening on port " + port + "!");
+    console.log("started server!");
 });
