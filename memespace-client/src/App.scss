@@ -1,0 +1,85 @@
+$primary-color: rgb(45, 12, 5); 
+$primary-color-light: rgb(222, 60, 28); 
+
+$secondary-color: rgb(18, 18, 66);
+$secondary-color-light: rgb(64, 64, 219);
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+
+}
+
+.layout-container {
+  display: flex;
+  max-width: 1000px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.page-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  background-color: #333; // Change this to your preferred background color
+  padding: 0 20px;
+  color: white;
+
+  .brand {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .searchBar {
+    flex: 1;
+    margin: 0 20px;
+    
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  }
+
+  .signupButton {
+    button {
+      background-color: #007BFF; // Change this to your preferred button color
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
+}
+
+.side-nav {
+  margin: 0 5%;
+}
+
+// button {
+//     border-color: $primary-color-light !important;
+//     background-color: $secondary-color-light !important;
+
+//     &:hover {
+//       border-color: $secondary-color-light !important;
+//       background-color: $primary-color-light !important;
+//     }
+// }
+
+.btn-close {
+  color: white !important;
+}

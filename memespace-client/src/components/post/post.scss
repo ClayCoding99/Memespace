@@ -1,0 +1,72 @@
+.card {
+    max-width: 900px;
+
+    border-radius: 16px !important;
+} 
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-header-left {
+    gap: 12px;
+    display: flex;
+    align-items: center; // Center the content vertically
+    text-align: center;
+  }
+  
+  #communityImg {
+    width: 48px;
+    height: 32px;
+    border-radius: 8px;
+  }
+  
+  #post-time {
+    font-size: 1rem; // Use relative font size
+  }
+  
+  .post-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Center the content horizontally
+  }
+  
+  h1 {
+    margin-top: 8px;
+    font-size: 1.5rem; // Use relative font size
+    text-align: center;
+  }
+  
+  .post-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .post-description {
+    width: 100%;
+    font-size: 18px; // Use relative font size
+  }
+
+  .card-title {
+    font-size: 32px !important;
+  }
+
+  .post-bottom {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 70% 30%;
+  }
+  
+  .post-bottom-left,
+  .post-bottom-right {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+  
+  .post-bottom-right {
+    justify-content: flex-end;
+  }

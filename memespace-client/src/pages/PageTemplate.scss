@@ -1,0 +1,14 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 150px;
+    max-width: 1400px;
+    margin: 32px auto;
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    margin: 32px auto;
+    gap: 16px;
+}

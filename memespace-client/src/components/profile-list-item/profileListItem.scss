@@ -1,0 +1,19 @@
+.profile-list-item-container {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    border-radius: 16px;
+    padding: 4px 16px;
+}
+
+#username {
+    padding-left: 8px;
+    align-self: center;
+}
+
+.profile-picture {
+    width: 30px; /* Set the desired width */
+    height: 30px; /* Set the desired height */
+    border-radius: 50%; /* Make the image circular by setting border-radius to 50% */
+    object-fit: cover; /* Adjust the object-fit property as needed */
+}

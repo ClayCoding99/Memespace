@@ -1,0 +1,71 @@
+/* Add this SCSS in your .scss or .sass file */
+
+/* Style the form within a Bootstrap modal */
+
+@import "../../App.scss";
+
+form {
+  width: 100%; /* Full width within the modal */
+  padding: 20px;
+  border: none; /* Remove border */
+  background-color: #f7f7f7;
+  border-radius: 5px;
+
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    &:focus {
+      border: 1px solid #007BFF;
+      outline: none;
+    }
+
+    &::placeholder {
+      color: #ccc;
+    }
+
+    &:hover {
+      border: 1px solid #007BFF;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  // Add styles for the confirmPassword input if needed
+}
+
+.modal-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px; /* Adjust the margin as needed */
+  /* Add any additional styling for your link here */
+  cursor: pointer;
+  color: black;
+  text-decoration: underline;
+
+  &:hover {
+    color: blue;
+  }
+}
