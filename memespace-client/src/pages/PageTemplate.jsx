@@ -44,27 +44,27 @@ export default function PageTemplate() {
     <>
       <PostModal isEditing={false} user={user} show={show} handleShow={handleShow} handleClose={handleClose} />
 
-      <div className="home-container">
-        <ul className="profile-types">
-          <li onClick={() => setContentType("Images")}
-            className={contentType === "Images" ? "profile-type active" : "profile-type"}>Images</li>
-          <li onClick={() => setContentType("Videos")}
-            className={contentType === "Videos" ? "profile-type active" : "profile-type"}>Videos</li>
-        </ul>
+    <div className="home-container">
+          <ul className="profile-types">
+            <li onClick={() => setContentType("Images")}
+              className={contentType === "Images" ? "profile-type active" : "profile-type"}>Images</li>
+            <li onClick={() => setContentType("Videos")}
+              className={contentType === "Videos" ? "profile-type active" : "profile-type"}>Videos</li>
+          </ul>
 
-        {auth && (
-          <ListGroup horizontal className="w-100 text-center">
-            <ListGroup.Item>
-              <ProfileListItem />
-            </ListGroup.Item>
-            <ListGroup.Item className="w-100">
-              <Button className="w-100" onClick={handleShow}>Create Post</Button>
-            </ListGroup.Item>
-          </ListGroup>
-        )}
+          {auth && (
+            <ListGroup horizontal className="text-center">
+              <ListGroup.Item>
+                <ProfileListItem />
+              </ListGroup.Item>
+              <ListGroup.Item className="">
+                <Button className="w-100" onClick={handleShow}>Create Post</Button>
+              </ListGroup.Item>
+            </ListGroup>
+          )}
 
-        <div className="posts-container">
           {!posts && <div>Loading posts...</div>}
+    
           {posts && 
             posts.map((post, index) => {
               if (contentType === "Images") {
@@ -75,7 +75,7 @@ export default function PageTemplate() {
               }
             })
           }
-        </div>
+        
         
       </div>
     </>

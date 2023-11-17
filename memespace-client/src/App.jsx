@@ -6,20 +6,22 @@ import Profile from './pages/Profile';
 import Layout from './layout/layout';
 import { AuthProvider } from './context/AuthContext';
 import { UserProvider } from './context/UserContext';
-
+import MemeGenerator from './pages/MemeGenerator';
 
 function App() {
+
   return (
     <AuthProvider>
       <UserProvider>
-        <BrowserRouter>
-        <Layout>
-            <Routes>
-                <Route path="/home" element={<PageTemplate />} />
-                <Route path="/profile" element={<Profile />} />
-            </Routes>
+      <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/generator" element={<MemeGenerator />} />
+          <Route path="/home" element={<PageTemplate />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
         </Layout>
-        </BrowserRouter>
+      </BrowserRouter>
       </UserProvider>
     </AuthProvider>
   );

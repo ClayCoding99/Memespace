@@ -10,20 +10,23 @@ html, body {
 }
 
 .main-container {
-
-}
-
-.layout-container {
   display: flex;
-  max-width: 1000px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.page-container {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  flex-direction: column;
+  
+  .layout-container {
+    display: flex;
+    flex: 1; /* Allow the layout container to expand and take remaining space */
+    
+    .SideNav {
+      /* Add styles for SideNav component */
+      /* Consider setting width, background, etc. */
+    }
+    
+    .page-container {
+      flex: 1; /* Allow the page container to take the remaining space */
+      padding: 20px; /* Add padding for content */
+    }
+  }
 }
 
 .navbar {

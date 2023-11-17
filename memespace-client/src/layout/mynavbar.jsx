@@ -42,6 +42,7 @@ export function MyNavbar({setActiveSideLink}) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
+            <Nav.Link href="/generator">Generator</Nav.Link>
             <Nav.Link href="/messaging">Messaging</Nav.Link>
             <Nav.Link href="#pricing">Notifications</Nav.Link>
             <NavDropdown title="Groups" id="collapsible-nav-dropdown">
