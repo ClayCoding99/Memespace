@@ -9,7 +9,6 @@ import { UserProvider } from './context/UserContext';
 
 
 function App() {
-  
   return (
     <AuthProvider>
       <UserProvider>

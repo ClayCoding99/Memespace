@@ -18,7 +18,7 @@ export default function Profile() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const {auth, logout} = useContext(AuthContext);
+  const {auth, authLoading, logout} = useContext(AuthContext);
   const {user, setUser, userLoading} = useUser();
   
   const [posts, setPosts] = useState(null);
@@ -27,7 +27,6 @@ export default function Profile() {
   useEffect(() => {
     async function get() {
       let response = await getUserPosts();
-      console.log (response);
       if (response.userPosts !== null) {
         setPosts(response.userPosts);
       }
@@ -38,8 +37,8 @@ export default function Profile() {
   }, [userLoading]);
 
   // redirect player back to home page if they are not authenticated
-  if (!auth) {
-    window.location.href = "/Home";
+  if (!auth && !authLoading) {
+    window.location.href = "/home";
   }
 
   function handleLogout() { 

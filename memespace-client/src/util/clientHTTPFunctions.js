@@ -28,7 +28,7 @@ export async function getUsers() {
   }
 }
 
-export async function getUser() {
+export async function getAuthUser() {
   try {
     const authToken = localStorage.getItem('accessToken');
     const response = await axiosInstance.get('http://localhost:8000/v1/user', {
@@ -44,10 +44,23 @@ export async function getUser() {
   }
 }
 
+export async function getUser(email) {
+  try {
+    const response = await axiosInstance.get(`http://localhost:8000/v1/user/${email}`, {
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    return response.data; 
+  } catch (error) {
+    console.error("could not get user: " + error);
+    return {error: error};
+  }
+}
+
 export async function createPost(postData) {
   try {
     const formData = new FormData();
-    formData.append('userID', postData.userID);
     formData.append('title', postData.title);
     formData.append('file', postData.postFile);
     formData.append('description', postData.description);
@@ -61,17 +74,16 @@ export async function createPost(postData) {
   }
 }
 
-export async function updateProfile(profileData, userEmail) {
+export async function updateProfile(profileData) {
   try {
     const formData = new FormData();
     formData.append('displayname', profileData.displayname);
     formData.append('bio', profileData.bio);
     formData.append('profilePicture', profileData.profilePicture);
     formData.append('gender', profileData.gender);
-    formData.append('email', userEmail);
     formData.append('bannerColor', profileData.bannerColor);
 
-    const endpoint = `http://localhost:8000/v1/user/update/${userEmail}`;
+    const endpoint = `http://localhost:8000/v1/user/update`;
     const response = await axiosInstance.patch(endpoint, formData);
     return response.data;
   } catch (error) {

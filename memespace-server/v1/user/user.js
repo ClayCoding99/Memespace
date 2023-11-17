@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const authenticateToken = require('../middleware/authenticateToken.js');
 
-// get all users
+// get all users (can be done by anyone as of now)
 router.get("/all", async (req, res) => {
     try {
         const users = await User.find({});
@@ -21,7 +21,24 @@ router.get("/all", async (req, res) => {
     }
 });
 
-// get the current authenticated user (CHANGE)
+// get the user with the corresponding email
+router.get("/:email", async (req, res) => {
+    const email = req.params.email;
+    if (!email) {
+        return res.status(400).json({error: "must provide an email!"});
+    }
+    try {
+        const user = await User.findOne({email: email});
+        if (!user) {
+            return res.status(500).json({error: "Failed to obtain user with email: " + email});
+        }
+        return res.status(200).json({user: user});
+    } catch (error) {
+        res.status(500).json({error: error});
+    }
+});
+
+// get the current authenticated user
 router.get('/', authenticateToken, async (req, res) => {
     try {   
         const email = req.user.email;
@@ -41,14 +58,15 @@ router.get('/', authenticateToken, async (req, res) => {
     }
 });
 
-// update the authenticated user (CHANGE)
-router.patch('/update/:email', profilePictureUpload.single('profilePicture'), async (req, res) => {
+// update the authenticated user profile
+router.patch('/update', authenticateToken, profilePictureUpload.single('profilePicture'), async (req, res) => {
     try {
+        const email = req.user.email;
         const updatedUserData = req.body;
 
-        const user = await User.findOne({ email: updatedUserData.email });
+        const user = await User.findOne({ email: email });
         if (!user) {
-            return res.status(statusCodes.NOT_FOUND).json({ error: 'Could not find user with email: ' + updatedUserData.email + '!' });
+            return res.status(404).json({ error: 'Could not find user with email: ' + updatedUserData.email + '!' });
         }
 
         if (req.file) {
@@ -59,16 +77,16 @@ router.patch('/update/:email', profilePictureUpload.single('profilePicture'), as
             updatedUserData.profilePictureURL = req.file.filename;
         }
 
-        const updatedUser = await User.findOneAndUpdate({ email: updatedUserData.email }, updatedUserData, {new: true});
+        const updatedUser = await User.findOneAndUpdate({ email: email }, updatedUserData, {new: true});
 
         if (!updatedUser) {
-            return res.status(statusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Could not update user with email: ' + updatedUserData.email + '!' });
+            return res.status(statusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Could not update user with email: ' + email + '!' });
         }
 
-        res.status(statusCodes.OK).json({ msg: 'Successfully updated user', user: updatedUser });
+        res.status(200).json({ msg: 'Successfully updated user', user: updatedUser });
     } catch (error) {
         console.error(error);
-        res.status(statusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 });
 

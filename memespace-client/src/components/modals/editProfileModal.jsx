@@ -22,8 +22,8 @@ function EditProfileModal(props) {
     async function handleSubmit(event) {
         event.preventDefault();
 
-        console.log(profileData.profilePicture, props.user.email);
-        const response = await updateProfile(profileData, props.user.email);
+        console.log(profileData.profilePicture);
+        const response = await updateProfile(profileData);
         if (response.error) {
             Swal.fire({
                 title: 'Failed to update profile',

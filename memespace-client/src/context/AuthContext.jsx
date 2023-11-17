@@ -7,6 +7,7 @@ const axiosInstance = axios.create();
 // wrapper for authentication using JWT and axios interceptors
 const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState(false);
+    const [authLoading, setAuthLoading] = useState(true);
 
     useEffect(() => {
       // Check if user is already authenticated (e.g., tokens in localStorage)
@@ -14,6 +15,7 @@ const AuthProvider = ({ children }) => {
       if (accessToken) {
         setAuth(true);
       }
+      setAuthLoading(false);
     }, []);
 
     const handleTokenExpired = useCallback(async () => {
@@ -44,7 +46,7 @@ const AuthProvider = ({ children }) => {
       (config) => {
         // Do something before request is sent
         // For example, you can add headers or modify the request config
-        console.log('Request interceptor:', config);
+        // console.log('Request interceptor:', config);
         const accessToken = localStorage.getItem('accessToken');
         if (accessToken) {
           config.headers.Authorization = `Bearer ${accessToken}`;
@@ -174,6 +176,7 @@ const AuthProvider = ({ children }) => {
 
   const authContextValue = {
     auth,
+    authLoading,
     login,
     signup, 
     logout,

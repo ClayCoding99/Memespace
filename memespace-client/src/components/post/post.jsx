@@ -70,6 +70,7 @@ export function Post(props) {
       }
       const postUserResponse = await getUser(props.post.userID);
       if (!postUserResponse.error) {
+        console.log(postUserResponse.user.displayname);
         return setPostUser(postUserResponse.user);
       } else {
         throw error("Could not obtain user due to the following: " + postUserResponse.error);
